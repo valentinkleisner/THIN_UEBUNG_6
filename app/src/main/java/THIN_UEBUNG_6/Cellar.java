@@ -58,10 +58,12 @@ public class Cellar {
                 case '/':
                     number1 = stack.pop();
                     number2 = stack.pop();
-                    int division = (Integer.parseInt(String.valueOf(number1))/ Integer.parseInt(String.valueOf(number2)));
-                    stack.push(Integer.toString(division).charAt(0));
-                    System.out.print(number1 +" / "+ number2);
-                    System.out.print("Result :"+ (number1 / number2));
+                    if (!(isZero(number1)| isZero(number2))) {
+                        int division = (Integer.parseInt(String.valueOf(number1)) / Integer.parseInt(String.valueOf(number2)));
+                        stack.push(Integer.toString(division).charAt(0));
+                        System.out.print(number1 + " / " + number2);
+                        System.out.print("Result :" + (number1 / number2));
+                    }
                     break;
                 case '*':
                     number1 = stack.pop();
@@ -79,6 +81,13 @@ public class Cellar {
         }
 
     }
+
+        private boolean isZero(char number1) {
+           int digit = Integer.parseInt(String.valueOf(number1));
+           if (digit == 0) {
+               return true;
+           }return false;
+        }
 
         private boolean isNumeric(String number)
         {
