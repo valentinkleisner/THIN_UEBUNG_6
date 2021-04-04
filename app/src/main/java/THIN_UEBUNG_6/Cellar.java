@@ -8,7 +8,8 @@ public class Cellar {
     private Stack stack;
     private String input;
     private String[] strings;
-    private List<String> symbol = new ArrayList<>();
+    private List<String> symbol;
+    private Scanner scanner;
 
 
     public Cellar() {
@@ -16,18 +17,22 @@ public class Cellar {
     }
 
     public void start() {
-        readInput();
-        calculatePolishNotation();
+        scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+            input = scanner.nextLine();
+            fillSymbols();
+            calculatePolishNotation();
+        }
+
     }
 
-    private void readInput() {
-        Scanner scanner = new Scanner(System.in);
-        input = scanner.nextLine();
+
+    private void fillSymbols() {
+        symbol = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             symbol.add(String.valueOf(c));
         }
-        scanner.close();
     }
 
     public void calculatePolishNotation() {
