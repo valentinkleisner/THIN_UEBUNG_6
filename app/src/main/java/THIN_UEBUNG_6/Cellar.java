@@ -22,13 +22,14 @@ public class Cellar {
 
     private void readInput() {
         Scanner scanner = new Scanner(System.in);
-        input=scanner.nextLine();
-        strings = input.split("");
-        for (int i = 0; i < strings.length; i++) {
-            char c = strings[i].charAt(i);
+        input = scanner.nextLine();
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
             stack.push(c);
         }
+        scanner.close();
     }
+
     public void calculatePolishNotation() {
         for(char character : symbol) {
             if (isValid(character)) {
@@ -43,6 +44,7 @@ public class Cellar {
             }
         }
     }
+
     private void handleStack() throws Exception{
         char number1,number2;
         char character = stack.pop();
@@ -54,7 +56,7 @@ public class Cellar {
                         number2 = stack.pop();
                         int summand = (Integer.parseInt(String.valueOf(number1)) + Integer.parseInt(String.valueOf(number2)));
                         stack.push(Integer.toString(summand).charAt(0));
-                        System.out.print(number1 + " + " + number2);
+                        System.out.println(number1 + " + " + number2);
                         System.out.print("Result :" + (summand));
                         break;
                     case '-':
@@ -92,7 +94,6 @@ public class Cellar {
         } catch (Exception e) {
             System.out.println("Expression is not valid " + e.getMessage());
         }
-
     }
 
     private boolean isZero(char number1) {
