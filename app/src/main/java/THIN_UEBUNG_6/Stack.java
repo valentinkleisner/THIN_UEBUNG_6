@@ -1,4 +1,4 @@
-package main.java.THIN_UEBUNG_6;
+package THIN_UEBUNG_6;
 
 public class Stack{
     public final char EOS = '$';
