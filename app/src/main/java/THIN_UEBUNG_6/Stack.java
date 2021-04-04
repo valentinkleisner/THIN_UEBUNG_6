@@ -9,15 +9,19 @@ public class Stack{
         stack[0] = EOS;
     }
 
-    public void pop() {
+    public Character pop() {
         char[] newStack = new char[STACK_LENGTH];
+        char removedChar = stack[0];
         for (int i = 0; i < stack.length; i++) {
             newStack[i] = stack[i+1];
             if (stack[i+1] == EOS)
                 break;
         }
         stack = newStack;
+
+        return removedChar;
     }
+
 
     public void push(char character) {
         char[] newStack = new char[STACK_LENGTH];
