@@ -25,7 +25,7 @@ public class Cellar {
         input = scanner.nextLine();
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
-            stack.push(c);
+            symbol.add(c);
         }
         scanner.close();
     }
