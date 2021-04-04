@@ -8,7 +8,7 @@ public class Cellar {
     private Stack stack;
     private String input;
     private String[] strings;
-    private List<Character> symbol = new ArrayList<>();
+    private List<String> symbol = new ArrayList<>();
 
 
     public Cellar() {
@@ -25,13 +25,13 @@ public class Cellar {
         input = scanner.nextLine();
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
-            symbol.add(c);
+            symbol.add(String.valueOf(c));
         }
         scanner.close();
     }
 
     public void calculatePolishNotation() {
-        for(char character : symbol) {
+        for(String character : symbol) {
             if (isValid(character)) {
                 stack.push(character);
                 try {
@@ -46,48 +46,48 @@ public class Cellar {
     }
 
     private void handleStack() throws Exception{
-        char number1,number2;
-        char character = stack.pop();
+        String number1,number2;
+        String character = stack.pop();
         try {
             if (isOperator(character)) {
                 switch (character) {
-                    case '+':
+                    case "+":
                         number1 = stack.pop();
                         number2 = stack.pop();
-                        int summand = (Integer.parseInt(String.valueOf(number1)) + Integer.parseInt(String.valueOf(number2)));
-                        stack.push(Integer.toString(summand).charAt(0));
+                        int summand = (Integer.parseInt(number1) + Integer.parseInt(number2));
+                        stack.push(Integer.toString(summand));
                         System.out.println(number1 + " + " + number2);
                         System.out.print("Result :" + (summand));
                         break;
-                    case '-':
+                    case "-":
                         number1 = stack.pop();
                         number2 = stack.pop();
                         int subtraktion = (Integer.parseInt(String.valueOf(number1)) - Integer.parseInt(String.valueOf(number2)));
-                        stack.push(Integer.toString(subtraktion).charAt(0));
+                        stack.push(Integer.toString(subtraktion));
                         System.out.print(number1 + " - " + number2);
-                        System.out.print("Result :" + (number1 - number2));
+                        System.out.print("Result :" + subtraktion);
                         break;
-                    case '/':
+                    case "/":
                         number1 = stack.pop();
                         number2 = stack.pop();
                         if (!(isZero(number1) | isZero(number2))) {
                             int division = (Integer.parseInt(String.valueOf(number1)) / Integer.parseInt(String.valueOf(number2)));
-                            stack.push(Integer.toString(division).charAt(0));
+                            stack.push(Integer.toString(division));
                             System.out.print(number1 + " / " + number2);
-                            System.out.print("Result :" + (number1 / number2));
+                            System.out.print("Result :" + division);
                         }
                         break;
-                    case '*':
+                    case "*":
                         number1 = stack.pop();
                         number2 = stack.pop();
                         int multiplikation = (Integer.parseInt(String.valueOf(number1)) * Integer.parseInt(String.valueOf(number2)));
-                        stack.push(Integer.toString(multiplikation).charAt(0));
+                        stack.push(Integer.toString(multiplikation));
                         System.out.print(number1 + " * " + number2);
-                        System.out.print("Result :" + (number1 * number2));
+                        System.out.print("Result :" + multiplikation);
                         break;
                 }
             } else {
-                stack.push(input.charAt(0));
+                stack.push(input);
             }
         }catch(NumberFormatException e) {
             System.out.println("Expression is not valid " + e.getMessage());
@@ -96,15 +96,15 @@ public class Cellar {
         }
     }
 
-    private boolean isZero(char number1) {
-       int digit = Integer.parseInt(String.valueOf(number1));
+    private boolean isZero(String number1) {
+       int digit = Integer.parseInt(number1);
        if (digit == 0) {
            return true;
        }return false;
     }
 
-    private boolean isNumeric(char character) {
-        if(String.valueOf(character).matches("[0-9]")) {
+    private boolean isNumeric(String character) {
+        if(character.matches("[0-9]")) {
             return true;
         } else {
             return false;
@@ -112,8 +112,8 @@ public class Cellar {
 
     }
 
-    private boolean isOperator(char character) {
-        if(String.valueOf(character).matches("[+|-|*|/]")) {
+    private boolean isOperator(String character) {
+        if(character.matches("[+|-|*|/]")) {
             return true;
         } else {
             return false;
@@ -121,8 +121,8 @@ public class Cellar {
 
     }
 
-    private boolean isValid(char character) {
-        if(String.valueOf(character).matches("[[0-9]|+|-|*|/]")) {
+    private boolean isValid(String character) {
+        if(character.matches("[[0-9]|+|-|*|/]")) {
             return true;
         } else {
             return false;
