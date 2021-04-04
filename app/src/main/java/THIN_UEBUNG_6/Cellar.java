@@ -19,11 +19,14 @@ public class Cellar {
     private void readInput() {
         Scanner scanner = new Scanner(System.in);
         input=scanner.nextLine();
-        strings =input.split("([0-9][0-9][+|-]([0-9][0-9][+|-][*|/]?)?)*");
-
-        for (int i = 0; i < strings.length; i++) {
-            char c = strings[i].charAt(i);
-           symbol.add(c);
+        if (input.matches("([0-9][0-9][+|-]([0-9][0-9][+|-][*|/]?)?)*")) {
+            strings = input.split("([0-9][0-9][+|-][*|/]?)");
+            for (int i = 0; i < strings.length; i++) {
+                char c = strings[i].charAt(i);
+                symbol.add(c);
+            }
+        } else {
+            System.out.println("Incorrect Input.");
         }
     }
 
