@@ -13,6 +13,9 @@ public class Cellar {
 
     public Cellar() {
         stack = new Stack();
+    }
+
+    public void start() {
         readInput();
     }
 
@@ -23,7 +26,7 @@ public class Cellar {
             strings = input.split("([0-9][0-9][+|-][*|/]?)");
             for (int i = 0; i < strings.length; i++) {
                 char c = strings[i].charAt(i);
-                symbol.add(c);
+                stack.push(c);
             }
         } else {
             System.out.println("Incorrect Input.");
@@ -39,22 +42,34 @@ public class Cellar {
                 case '+':
                     number1 = stack.pop();
                     number2 = stack.pop();
+                    int summand = (Integer.parseInt(String.valueOf(number1))+ Integer.parseInt(String.valueOf(number2)));
+                    stack.push(Integer.toString(summand).charAt(0));
                     System.out.print(number1 + " + " + number2);
+                    System.out.print("Result :"+ (summand));
                     break;
                 case '-':
                     number1 = stack.pop();
                     number2 = stack.pop();
+                    int subtraktion = (Integer.parseInt(String.valueOf(number1))- Integer.parseInt(String.valueOf(number2)));
+                    stack.push(Integer.toString(subtraktion).charAt(0));
                     System.out.print(number1 +" - "+ number2);
+                    System.out.print("Result :"+ (number1 - number2));
                     break;
                 case '/':
                     number1 = stack.pop();
                     number2 = stack.pop();
+                    int division = (Integer.parseInt(String.valueOf(number1))/ Integer.parseInt(String.valueOf(number2)));
+                    stack.push(Integer.toString(division).charAt(0));
                     System.out.print(number1 +" / "+ number2);
+                    System.out.print("Result :"+ (number1 / number2));
                     break;
                 case '*':
                     number1 = stack.pop();
                     number2 = stack.pop();
+                    int multiplikation = (Integer.parseInt(String.valueOf(number1))* Integer.parseInt(String.valueOf(number2)));
+                    stack.push(Integer.toString(multiplikation).charAt(0));
                     System.out.print(number1 +" * "+ number2);
+                    System.out.print("Result :"+ (number1 * number2));
                     break;
             }
         }
