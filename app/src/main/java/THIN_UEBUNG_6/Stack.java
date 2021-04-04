@@ -25,12 +25,13 @@ public class Stack{
 
     public void push(String character) {
         String[] newStack = new String[STACK_LENGTH];
-        newStack[0] = character;
+
         for (int i = 0; i < stack.length; i++) {
             newStack[i+1] = stack[i];
             if (stack[i].equals(EOS))
                 break;
         }
+        newStack[0] = character;
         stack = newStack;
     }
 

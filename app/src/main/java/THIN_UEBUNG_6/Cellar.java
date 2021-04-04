@@ -57,15 +57,15 @@ public class Cellar {
                         int summand = (Integer.parseInt(number1) + Integer.parseInt(number2));
                         stack.push(Integer.toString(summand));
                         System.out.println(number1 + " + " + number2);
-                        System.out.print("Result :" + (summand));
+                        System.out.println("Result :" + (summand));
                         break;
                     case "-":
                         number1 = stack.pop();
                         number2 = stack.pop();
                         int subtraktion = (Integer.parseInt(String.valueOf(number1)) - Integer.parseInt(String.valueOf(number2)));
                         stack.push(Integer.toString(subtraktion));
-                        System.out.print(number1 + " - " + number2);
-                        System.out.print("Result :" + subtraktion);
+                        System.out.println(number1 + " - " + number2);
+                        System.out.println("Result :" + subtraktion);
                         break;
                     case "/":
                         number1 = stack.pop();
@@ -73,21 +73,21 @@ public class Cellar {
                         if (!(isZero(number1) | isZero(number2))) {
                             int division = (Integer.parseInt(String.valueOf(number1)) / Integer.parseInt(String.valueOf(number2)));
                             stack.push(Integer.toString(division));
-                            System.out.print(number1 + " / " + number2);
-                            System.out.print("Result :" + division);
+                            System.out.println(number1 + " / " + number2);
+                            System.out.println("Result :" + division);
                         }
                         break;
                     case "*":
                         number1 = stack.pop();
                         number2 = stack.pop();
-                        int multiplikation = (Integer.parseInt(String.valueOf(number1)) * Integer.parseInt(String.valueOf(number2)));
+                        int multiplikation = (Integer.parseInt(number1) * Integer.parseInt(String.valueOf(number2)));
                         stack.push(Integer.toString(multiplikation));
-                        System.out.print(number1 + " * " + number2);
-                        System.out.print("Result :" + multiplikation);
+                        System.out.println(number1 + " * " + number2);
+                        System.out.println("Result :" + multiplikation);
                         break;
                 }
             } else {
-                stack.push(input);
+                stack.push(character);
             }
         }catch(NumberFormatException e) {
             System.out.println("Expression is not valid " + e.getMessage());
