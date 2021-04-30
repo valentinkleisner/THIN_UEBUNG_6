@@ -1,0 +1,18 @@
+plugins {
+    id 'application'
+}
+
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'THIN_UEBUNG_9.TuringMachine'
+}

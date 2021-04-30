@@ -9,3 +9,5 @@
 
 rootProject.name = 'THIN_UEBUNG_6'
 include('app')
+include 'THIN_UEBUNG_9'
+
