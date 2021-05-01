@@ -2,7 +2,7 @@ package THIN_UEBUNG_9;
 
 public class Transition {
     public static final int RIGHT = 1;
-    public static final int LEFT = 0;
+    public static final int LEFT = -1;
 
     private int currentState;
     private int nextState;
