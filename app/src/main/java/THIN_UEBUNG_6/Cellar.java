@@ -48,6 +48,14 @@ public class Cellar {
                 System.out.println("Expression not accepted unknown Sign.");
             }
         }
+        if(!stack.peek().equals(stack.EOS)) {
+            String result = stack.pop();
+            if (isNumeric(result)) {
+                System.out.println("Result: " + result);
+            } else {
+                System.out.println("Expression not accepted. Stack not empty");
+            }
+        }
     }
 
     private void handleStack() throws Exception{
@@ -61,16 +69,12 @@ public class Cellar {
                         number2 = stack.pop();
                         int summand = (Integer.parseInt(number1) + Integer.parseInt(number2));
                         stack.push(Integer.toString(summand));
-                        System.out.println(number1 + " + " + number2);
-                        System.out.println("Result :" + (summand));
                         break;
                     case "-":
                         number1 = stack.pop();
                         number2 = stack.pop();
                         int subtraktion = (Integer.parseInt(String.valueOf(number1)) - Integer.parseInt(String.valueOf(number2)));
                         stack.push(Integer.toString(subtraktion));
-                        System.out.println(number1 + " - " + number2);
-                        System.out.println("Result :" + subtraktion);
                         break;
                     case "/":
                         number1 = stack.pop();
@@ -78,8 +82,6 @@ public class Cellar {
                         if (!(isZero(number1) | isZero(number2))) {
                             int division = (Integer.parseInt(String.valueOf(number1)) / Integer.parseInt(String.valueOf(number2)));
                             stack.push(Integer.toString(division));
-                            System.out.println(number1 + " / " + number2);
-                            System.out.println("Result :" + division);
                         }
                         break;
                     case "*":
@@ -87,8 +89,6 @@ public class Cellar {
                         number2 = stack.pop();
                         int multiplikation = (Integer.parseInt(number1) * Integer.parseInt(String.valueOf(number2)));
                         stack.push(Integer.toString(multiplikation));
-                        System.out.println(number1 + " * " + number2);
-                        System.out.println("Result :" + multiplikation);
                         break;
                 }
             } else {
@@ -109,7 +109,7 @@ public class Cellar {
     }
 
     private boolean isNumeric(String character) {
-        if(character.matches("[0-9]")) {
+        if(character.matches("[1-9][0-9]*")) {
             return true;
         } else {
             return false;
