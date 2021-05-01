@@ -11,23 +11,27 @@ public class TuringMachine {
 
     private List<Character> tape = new LinkedList<>();
     private List<String> states = new ArrayList<>();
-    private Map<Integer, Transition> transitions = new HashMap<>();
+    private Map<Integer, ArrayList<Transition>> transitions = new HashMap<>();
 
     private int currentState = INITIAL_STATE;
+    private int finalState;
     private int mode;
     private int tapeHeadPosition = 24;
     private int steps = 0;
+    private boolean halt = false;
 
     public TuringMachine()  {
-        setMode();
-        String[] binaryFactors = convertDecimalToBinaryString(getAndCheckInput());
-        initializeTape(binaryFactors);
         setTransitions();
-        calculateAndPrintResult();
     }
 
     public static void main(String[] args) {
         TuringMachine tm = new TuringMachine();
+        tm.setMode();
+        String[] binaryFactors = convertDecimalToBinaryString(getAndCheckInput());
+        tm.initializeTape(binaryFactors);
+        if (tm.start()) {
+            System.out.println("Result:     " + tm.getResult());
+        } else System.out.println("Error!");
     }
 
     private void initializeTape(String[] factors) {
@@ -52,18 +56,44 @@ public class TuringMachine {
         }
     }
 
-    private void calculateAndPrintResult() {
-        //TODO
-        int result = 0;
-        if (mode == STEP_MODUS) {
-            printInfo();
-            printTape();
+    private boolean start() {
+        if (mode == STEP_MODUS) printInfo(); printTape();
+        while (!halt) {
+            List<Transition> possibleTransitions = transitions.get(currentState);
+            boolean transitionFound = false;
+            for (Transition t : possibleTransitions) {
+                if (t.getReadCharacter() == tape.get(tapeHeadPosition)) {
+                    tape.set(tapeHeadPosition, t.getWriteCharacter());
+                    tapeHeadPosition += t.getMoveDirection();
+                    currentState = t.getNextState();
+                    transitionFound = true;
+                    steps++;
+                    break;
+                }
+            }
+            if (currentState == finalState) {
+                halt = true;
+                return true;
+            }
+            if (!transitionFound) {
+                System.out.println("No valid Transition found.");
+                halt = true;
+                return false;
+            }
+            // print Info if Step-Modus + sleep
+            if (mode == STEP_MODUS) {
+                printInfo();
+                printTape();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        return false;
     }
 
-    private void setTransitions() {
-        //TODO
-    }
 
     /**
      * Gets the input from the user and checks if its valid. Expected Format (x and y being natural numbers): x*y
@@ -93,10 +123,21 @@ public class TuringMachine {
         return binaryFactors;
     }
 
+    private int getResult() {
+        int resultPos = tape.lastIndexOf('#') + 1;
+        StringBuilder binarySB = new StringBuilder();
+        while (tape.get(resultPos) != BLANK) {
+            binarySB.append(tape.get(resultPos));
+            resultPos++;
+        }
+        return Integer.parseInt(binarySB.toString(), 2);
+    }
+
     private void setMode() {
         Scanner scanner = new Scanner(System.in);
         boolean isCorrectInput = false;
-        int chosenMode = 0;
+        int chosenMode;
+
         while (!isCorrectInput) {
             System.out.println("Mode: (Step-Modus: 0, Laufmodus: 1)");
             String input = scanner.nextLine().trim();
@@ -124,8 +165,12 @@ public class TuringMachine {
     }
 
     private void printInfo() {
-        System.out.println("Current State: q" + currentState);
+        System.out.println("\nCurrent State: q" + currentState);
         System.out.println("Number of Steps until now: " + steps);
+    }
+
+    private void setTransitions() {
+        //TODO set transition & final state
     }
 
 }
