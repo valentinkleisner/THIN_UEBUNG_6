@@ -295,7 +295,7 @@ public class TuringMachine {
 
                         new Transition(12, 13, BLANK, PERMANENT_ONE, RIGHT),
                         new Transition(12, 13, ZERO, PERMANENT_ONE, RIGHT),
-                        new Transition(12, 14, ONE, PERMANENT_ONE, LEFT)
+                        new Transition(12, 14, ONE, PERMANENT_ZERO, LEFT)
                 ));
         states.put(12, transitionsState12);
         // q13
@@ -312,7 +312,7 @@ public class TuringMachine {
         states.put(13, transitionsState13);
         // q14
         ArrayList<Transition> transitionsState14 = new ArrayList<>(Arrays.asList
-                (new Transition(14, 14, ONE, ONE, LEFT),
+                (new Transition(14, 14, ONE, ZERO, LEFT),
 
                         new Transition(14, 13, BLANK, ONE, RIGHT),
                         new Transition(14, 13, ZERO, ONE, RIGHT)
@@ -341,6 +341,7 @@ public class TuringMachine {
         // q19
         ArrayList<Transition> transitionsState19 = new ArrayList<>(Arrays.asList
                 (new Transition(19, 19, ONE, ONE, RIGHT),
+                        new Transition(19, 19, ZERO, ZERO, RIGHT),
                         new Transition(19, 19, PROCESSED_ONE, PROCESSED_ONE, RIGHT),
                         new Transition(19, 19, PROCESSED_ZERO, PROCESSED_ZERO, RIGHT),
                         new Transition(19, 19, PERMANENT_ONE, PERMANENT_ONE, RIGHT),
@@ -375,12 +376,12 @@ public class TuringMachine {
 
                         new Transition(22, 19, ZERO, PROCESSED_ONE, RIGHT),
                         new Transition(22, 19, BLANK, PROCESSED_ONE, RIGHT),
-                        new Transition(22, 23, ONE, PROCESSED_ONE, LEFT)
+                        new Transition(22, 23, ONE, PROCESSED_ZERO, LEFT)
                 ));
         states.put(22, transitionsState22);
         // q23
         ArrayList<Transition> transitionsState23 = new ArrayList<>(Arrays.asList
-                (new Transition(23, 23, ONE, ONE, LEFT),
+                (new Transition(23, 23, ONE, ZERO, LEFT),
 
                         new Transition(23, 19, BLANK, ONE, RIGHT),
                         new Transition(23, 19, ZERO, ONE, RIGHT)
