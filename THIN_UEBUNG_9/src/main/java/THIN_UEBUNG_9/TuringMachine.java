@@ -101,9 +101,14 @@ public class TuringMachine {
         boolean isCorrectInput = false;
         Scanner scanner = new Scanner(System.in);
         String regex = "^[0|1]+$";
-        String binaryInput = null;
+        String binaryInput = "1010010001000100110100010000000000010001011000100100010010011000100010000100010011000010" +
+                "01000001000100110000010010000010010011000001000100000010001001100000010010000001001001100000010001000" +
+                "00001001011000000010010000000100101100000001000100000000100010110000000010010000000010010110000000010" +
+                "00100001001001100000000010010000000001001011000000000100010000000000100010110000000000100100000000001" +
+                "001011000000000010001010010011000000000001001000000000001001011000000000001000100100010011" +
+                "000010001000000000100010111001001000100100100";
 
-        while (!isCorrectInput) {
+        /*while (!isCorrectInput) {
             System.out.println("Enter binary encoded TM:");
             String line = scanner.nextLine().trim();
             if (line.matches(regex)) {
@@ -111,7 +116,7 @@ public class TuringMachine {
                 binaryInput = line;
                 System.out.println("Correct Input.");
             } else System.out.println("Wrong Input, please try again.\n");
-        }
+        }*/
         return binaryInput;
     }
 
@@ -122,7 +127,7 @@ public class TuringMachine {
            binarySB.append(tape.get(resultIndex));
            resultIndex++;
        }
-       return Integer.parseInt(binarySB.toString(), 2);
+       return binarySB.length();
     }
 
     private void setMode() {
