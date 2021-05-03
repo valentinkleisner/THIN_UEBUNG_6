@@ -27,6 +27,7 @@ public class TuringMachine {
     private int tapeHeadPosition;
     private int steps = 0;
     private boolean halt = false;
+    private int firstResultIndex;
 
     public static void main(String[] args) {
         while (true) {
@@ -58,6 +59,7 @@ public class TuringMachine {
                 zeroCount = 0;
             }
         }
+        firstResultIndex = tape.size() + 1;
         for (int i = 0; i < 99; i++) {
             tape.add(BLANK);
         }
@@ -85,7 +87,6 @@ public class TuringMachine {
                     break;
                 }
             }
-
             if (!transitionFound) {
                 System.out.println("No valid Transition found.");
                 halt = true;
@@ -115,7 +116,13 @@ public class TuringMachine {
     }
 
     private int getResult() {
-       return 0;
+       int resultIndex = firstResultIndex;
+       StringBuilder binarySB = new StringBuilder();
+       while (tape.get(resultIndex) != BLANK) {
+           binarySB.append(tape.get(resultIndex));
+           resultIndex++;
+       }
+       return Integer.parseInt(binarySB.toString(), 2);
     }
 
     private void setMode() {
@@ -229,7 +236,6 @@ public class TuringMachine {
                 }
             } else {
                     zeroCount++;
-
                 }
             stringIndexPos++;
         }
