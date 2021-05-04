@@ -36,6 +36,8 @@ public class TuringMachine {
             tm.setMode();
             if (tm.start()) {
                 System.out.println("Result:     " + tm.getResult() + "\n");
+                System.out.println("Steps: " + tm.getSteps());
+                System.out.println("Reader Position: " + tm.getReaderPosition());
             } else System.out.println("Couldn't get Result!\n");
         }
     }
@@ -189,9 +191,9 @@ public class TuringMachine {
                 "001011000000000010001010010011000000000001001000000000001001011000000000001000100100010011" +
                 "000010001000000000100010" +
                 //multiplication factors  13*17
-                //"111001001001001001001001001001001001001001000100100100100100100100100100100100100100100100100100";
+                "111001001001001001001001001001001001001001000100100100100100100100100100100100100100100100100100";
                 //multiplication factors 2*4
-                "111001001000100100100100";
+                //"111001001000100100100100";
                 //multiplication factors 1*27
                 //"111001000100100100100100100100100100100100100100100100100100100100100100100100100100100100";
                 //multiplication factors 0*23
@@ -247,6 +249,14 @@ public class TuringMachine {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int getSteps() {
+        return steps;
+    }
+
+    public int getReaderPosition() {
+        return tapeHeadPosition;
     }
 
     private void printTape() {
